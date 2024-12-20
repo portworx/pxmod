@@ -32,6 +32,8 @@ Requires kernel >= 3.10
 3.19.0-43-generic
 # # Make sure you have the kernel headers... if not, get them.
 # ls /usr/src/linux-headers-<kernel version>
+# # Make sure you have the needed build packages
+# apt-get install rpm alien
 # KERNELPATH="/usr/src/linux-headers-3.19.0-43-generic" VERSION=3.19.0 REVISION=43 ./buildrpm.sh
 # # This will generate an install package in px-fuse/rpm/px/RPMS/x86_64/
 # dpkg --install px_<version>.deb
