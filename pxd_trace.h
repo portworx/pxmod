@@ -32,7 +32,7 @@ TRACE_EVENT(
 
 TRACE_EVENT(
 	pxd_release,
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(6,5,0) || defined(__RHEL_GT_94__) || defined(__SUSE_GTE_SP6__)
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(6,5,0) || defined(__RHEL_GT_94__) || defined(__SUSE_GTE_SP6__) || defined(__SLE_MICRO_GTE_6_0__)
 	TP_PROTO(uint64_t dev_id, int major, int minor),
 	TP_ARGS(dev_id, major, minor),
 	TP_STRUCT__entry(

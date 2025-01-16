@@ -99,7 +99,7 @@ struct pxd_context* find_context(unsigned ctx)
 }
 
 
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(6,5,0) || defined(__RHEL_GT_94__)  || defined(__SUSE_GTE_SP6__)
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(6,5,0) || defined(__RHEL_GT_94__)  || defined(__SUSE_GTE_SP6__) || defined(__SLE_MICRO_GTE_6_0__)
 static int pxd_open(struct gendisk *bdev, blk_mode_t mode)
 #else
 static int pxd_open(struct block_device *bdev, fmode_t mode)
@@ -107,7 +107,7 @@ static int pxd_open(struct block_device *bdev, fmode_t mode)
 {
 	struct pxd_device *pxd_dev;
 	int err = 0;
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(6,5,0) || defined(__RHEL_GT_94__)  || defined(__SUSE_GTE_SP6__)
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(6,5,0) || defined(__RHEL_GT_94__)  || defined(__SUSE_GTE_SP6__) || defined(__SLE_MICRO_GTE_6_0__)
 	pxd_dev = bdev->private_data;
 #else
 	pxd_dev = bdev->bd_disk->private_data;
@@ -134,7 +134,7 @@ static int pxd_open(struct block_device *bdev, fmode_t mode)
 	return err;
 }
 
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(6,5,0) || defined(__RHEL_GT_94__) || defined(__SUSE_GTE_SP6__)
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(6,5,0) || defined(__RHEL_GT_94__) || defined(__SUSE_GTE_SP6__) || defined(__SLE_MICRO_GTE_6_0__)
 static void pxd_release(struct gendisk *disk)
 #else
 static void pxd_release(struct gendisk *disk, fmode_t mode)
@@ -152,7 +152,7 @@ static void pxd_release(struct gendisk *disk, fmode_t mode)
 	BUG_ON(pxd_dev->magic != PXD_DEV_MAGIC);
 	pxd_dev->open_count--;
 	spin_unlock(&pxd_dev->lock);
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(6,5,0) || defined(__RHEL_GT_94__) || defined(__SUSE_GTE_SP6__)
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(6,5,0) || defined(__RHEL_GT_94__) || defined(__SUSE_GTE_SP6__) || defined(__SLE_MICRO_GTE_6_0__)
 	trace_pxd_release(pxd_dev->dev_id, pxd_dev->major, pxd_dev->minor);
 #else
 	trace_pxd_release(pxd_dev->dev_id, pxd_dev->major, pxd_dev->minor, mode);
